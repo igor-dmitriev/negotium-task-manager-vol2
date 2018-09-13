@@ -1,16 +1,53 @@
-plugins {
-    id 'java'
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://repo1.maven.org/maven2/"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+
+    }
+    dependencies {
+        classpath('org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2')
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
-group 'negotium-task-manager-vol2'
-version '1.0-SNAPSHOT'
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'org.sonarqube'
 
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
+sonarqube {
+    properties {
+        property "sonar.projectName", "negotium"
+        property "sonar.java.binaries", "build/libs"
+    }
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+allprojects {
+    apply plugin: 'java'
+
+    group = 'com.negotium'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile('org.testcontainers:testcontainers:1.8.3')
+        testCompile('org.testcontainers:localstack:1.8.3')
+        testCompile('org.testcontainers:postgresql:1.8.3')
+
+        testCompile('org.assertj:assertj-core:3.8.0')
+    }
 }
+
+jar.enabled = false

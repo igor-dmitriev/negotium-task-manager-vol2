@@ -1,0 +1,48 @@
+version: '2.1'
+services:
+
+   reminder:
+     build:
+       context: .
+       dockerfile: Dockerfile
+       args:
+         jarFile: ./reminder/build/libs/reminder-0.0.1-SNAPSHOT.jar
+     command: -m 2056m
+     ports:
+       - 8001:8001
+     environment:
+       - APP_CONFIG_TASK-ENDPOINT=http://task:8000
+       - AWS_DYNAMODB_ENDPOINT=http://dynamodb:4569
+     depends_on:
+       - task
+       - dynamodb
+
+   task:
+      build:
+        context: .
+        dockerfile: Dockerfile
+        args:
+          jarFile: ./task/build/libs/task-0.0.1-SNAPSHOT.jar
+      command: -m 2056m
+      ports:
+        - 8000:8000
+      environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/negotium
+      depends_on:
+        - postgres
+
+   dynamodb:
+      image: localstack/localstack:0.8.6
+      environment:
+        - SERVICES=dynamodb
+      ports:
+        - 4569:4569
+
+   postgres:
+      image: postgres:9.6.1
+      ports:
+        - 5432:5432
+      environment:
+        - POSTGRES_DB=negotium
+        - POSTGRES_USER=Igor
+        - POSTGRES_PASSWORD=ZinEnclcdasrt1

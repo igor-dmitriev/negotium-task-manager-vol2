@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+ext {
+    restAssuredVersion = "3.0.7"
+}
+
+dependencies {
+    compile project(':common')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("io.rest-assured:rest-assured:${restAssuredVersion}")
+    testCompile('com.jayway.jsonpath:json-path-assert:2.2.0')
+}
+
+bootJar {
+    enabled = false
+}

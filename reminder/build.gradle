@@ -1,0 +1,49 @@
+plugins {
+    id 'net.ltgt.apt' version '0.9'
+}
+
+configurations {
+    mapstruct
+}
+
+ext {
+    mapstructVersion = "1.2.0.Final"
+    generatedMapperSourcesDir = "${buildDir}/generated/source/apt"
+    awsJavaSdkVersion = "1.11.311"
+    twilioSdkVersion = "7.17.0"
+}
+
+sourceSets.main {
+    ext.originalJavaSrcDirs = java.srcDirs
+    java.srcDir "${generatedMapperSourcesDir}"
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+    compile project(':common')
+
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile("com.amazonaws:aws-java-sdk:${awsJavaSdkVersion}")
+    compile("com.twilio.sdk:twilio:${twilioSdkVersion}")
+    compile("org.apache.commons:commons-lang3:3.0")
+
+    compileOnly('org.projectlombok:lombok')
+    compile("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
+    apt("org.mapstruct:mapstruct-processor:${mapstructVersion}")
+    apt("org.projectlombok:lombok")
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('io.rest-assured:rest-assured')
+    testCompile('io.rest-assured:spring-mock-mvc')
+}
+
+compileJava.dependsOn(processResources)
+
+bootJar {
+    manifest {
+        attributes 'Start-Class': 'com.negotium.reminder.ReminderApplication'
+    }
+}

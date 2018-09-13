@@ -1,0 +1,28 @@
+server:
+  port: 8000
+
+spring:
+  datasource:
+   # Postgresql
+    url: jdbc:postgresql://localhost:5432/negotium
+    driverClassName: org.postgresql.Driver
+    username: Igor
+    password: ZinEnclcdasrt1
+
+   # MS SQL
+   # url: jdbc:sqlserver://127.0.0.1:1433
+   # driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+   # username: SA
+   # password: ZinEnclcdasrt1
+
+
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+      hibernate.format_sql: true
+      hibernate.use_sql_comments: true

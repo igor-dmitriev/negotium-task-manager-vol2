@@ -1,0 +1,49 @@
+plugins {
+    id 'net.ltgt.apt' version '0.9'
+}
+
+configurations {
+    mapstruct
+}
+
+ext {
+    mapstructVersion = "1.2.0.Final"
+    generatedMapperSourcesDir = "${buildDir}/generated/source/apt"
+}
+
+sourceSets.main {
+    ext.originalJavaSrcDirs = java.srcDirs
+    java.srcDir "${generatedMapperSourcesDir}"
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+    compile project(':common')
+
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.flywaydb:flyway-core')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+
+    runtime('org.postgresql:postgresql')
+    runtime('com.h2database:h2')
+    compile('com.microsoft.sqlserver:mssql-jdbc')
+    compileOnly('org.projectlombok:lombok')
+    compile("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
+    apt("org.mapstruct:mapstruct-processor:${mapstructVersion}")
+    apt("org.projectlombok:lombok")
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.4'
+
+    testCompile('com.github.database-rider:rider-core:1.2.8')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('io.rest-assured:rest-assured')
+    testCompile('io.rest-assured:spring-mock-mvc')
+}
+
+bootJar {
+    manifest {
+        attributes 'Start-Class': 'com.negotium.task.TaskApplication'
+    }
+}

@@ -1,0 +1,10 @@
+CREATE SEQUENCE tasks_seq
+  START WITH 1
+  INCREMENT BY 20;
+
+CREATE TABLE tasks (
+  id          INTEGER PRIMARY KEY,
+  description TEXT NOT NULL,
+  created_at  TIMESTAMP   NOT NULL,
+  status      VARCHAR(10) NOT NULL DEFAULT 'ACTIVE'
+);

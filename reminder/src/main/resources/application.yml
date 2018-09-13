@@ -1,0 +1,32 @@
+server:
+  port: 8001
+
+app:
+  config:
+    user: Igor Dmitriev
+    task-endpoint: http://localhost:8000
+  job:
+    scheduler:
+      execution:
+        repeat: 0 0/1 * * * ?
+  reminder:
+    pattern: \b(через) (?<value>\d+) (минут|минуту|минуты)\b
+  aws:
+    dynamoDb:
+      readCapacityUnits: 1
+      writeCapacityUnits: 1
+
+twilio:
+  phone-from: "+16149454683"
+  phone-to: "+380993256678"
+  twim-url: http://demo.twilio.com/docs/voice.xml
+  account-sid: local
+  auth-token: local
+
+logging:
+  level:
+    com:
+      negotium: debug
+
+
+

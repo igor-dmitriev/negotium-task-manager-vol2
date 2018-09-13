@@ -1,0 +1,2 @@
+cacheConnection: true
+leakHunter: false
