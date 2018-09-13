@@ -6,6 +6,7 @@ import com.jayway.jsonpath.JsonPath;
 import org.apache.http.HttpStatus;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,6 +22,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringRunner.class)
+@Ignore
 public class AcceptanceTest {
 
   private static final String TASK_SERVICE_NAME = "task_1";

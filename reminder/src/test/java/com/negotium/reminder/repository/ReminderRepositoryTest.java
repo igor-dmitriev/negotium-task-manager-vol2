@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = ReminderRepositoryTestConf.class, initializers = ReminderRepositoryTest.Initializer.class)
+@Ignore
 public class ReminderRepositoryTest {
 
   private static final int DYNAMODB_PORT = 4569;

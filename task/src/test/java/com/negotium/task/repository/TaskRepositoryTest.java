@@ -6,6 +6,7 @@ import com.negotium.common.meta.TaskStatus;
 import com.negotium.task.entity.TaskEntity;
 
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @ContextConfiguration(initializers = TaskRepositoryTest.Initializers.class)
+@Ignore
 public class TaskRepositoryTest {
 
   @ClassRule
