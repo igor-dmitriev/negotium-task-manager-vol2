@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -36,18 +37,19 @@ public class DefaultReminderService implements ReminderService {
   public List<ReminderEntity> getAllScheduled() {
     LocalDateTime startOfTheCurrentMinute = LocalDateTime.now(Clock.systemUTC()).withSecond(0).withNano(0);
     LocalDateTime endOfTheCurrentMinute = LocalDateTime.now(Clock.systemUTC()).withSecond(59).withNano(999_999_999);
-    return reminderRepository.findReminders(
+    /*return reminderRepository.findReminders(
         ReminderCriteria.builder().user(user)
             .status(ReminderStatus.SCHEDULED)
             .fromDate(startOfTheCurrentMinute)
             .toDate(endOfTheCurrentMinute)
             .build()
-    );
+    );*/
+    return Collections.emptyList();
   }
 
   @Override
   public void update(ReminderEntity reminder) {
-    reminderRepository.update(reminder);
+    reminderRepository.save(reminder);
   }
 
   @Override
@@ -58,6 +60,7 @@ public class DefaultReminderService implements ReminderService {
         .status(ReminderStatus.SCHEDULED)
         .fromDate(ONE_HUNDRED_YEARS_BACK)
         .toDate(ONE_HUNDRED_YEARS_FORWARD);
-    return reminderRepository.findReminders(searchCriteriaBuilder.build());
+    //return reminderRepository.findReminders(searchCriteriaBuilder.build());
+    return Collections.emptyList();
   }
 }

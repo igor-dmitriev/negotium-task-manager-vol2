@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.ZoneOffset;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -56,8 +57,8 @@ public class DynamoDbReminderRepository implements ReminderRepository {
   }
 
   @Override
-  public ReminderEntity findOne(String user) {
-    return mapper.load(ReminderEntity.class, user);
+  public Optional<ReminderEntity> findOne(String user) {
+    return Optional.ofNullable(mapper.load(ReminderEntity.class, user));
   }
 
   @Override

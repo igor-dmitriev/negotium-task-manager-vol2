@@ -9,14 +9,12 @@ import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType;
 import com.negotium.reminder.config.ReminderRepositoryTestConf;
-import com.negotium.reminder.data.ReminderCriteria;
 import com.negotium.reminder.entity.ReminderEntity;
 import com.negotium.reminder.meta.ReminderStatus;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +25,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.testcontainers.containers.localstack.LocalStackContainer;
 
-import java.time.Clock;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testcontainers.containers.localstack.LocalStackContainer.Service.DYNAMODB;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = ReminderRepositoryTestConf.class, initializers = DynamoDbReminderRepositoryTest.Initializer.class)
-@Ignore
 public class DynamoDbReminderRepositoryTest {
 
   private static final int DYNAMODB_PORT = 4569;
@@ -65,28 +58,19 @@ public class DynamoDbReminderRepositoryTest {
   }
 
   @Test
-  public void returnOnlyScheduledRemindersInDateRange() {
+  public void shouldSaveReminder() {
     // given
     ReminderEntity reminder = ReminderEntity.builder()
         .user(USER)
         .status(ReminderStatus.SCHEDULED)
-        .remindAt(Instant.now(Clock.systemUTC()).plusSeconds(1).toEpochMilli())
         .build();
     repository.save(reminder);
 
     // when
-    List<ReminderEntity> foundReminders = repository.findReminders(
-        ReminderCriteria.builder()
-            .user(USER)
-            .status(ReminderStatus.SCHEDULED)
-            .fromDate(LocalDateTime.now(ZoneOffset.UTC).minusSeconds(5))
-            .toDate(LocalDateTime.now(ZoneOffset.UTC).plusSeconds(5))
-            .build()
-    );
+    Optional<ReminderEntity> saved = repository.findOne(USER);
 
     // then
-    assertThat(foundReminders).hasSize(1);
-    assertThat(foundReminders.get(0)).isEqualTo(reminder);
+    assertThat(saved).isEqualTo(Optional.of(reminder));
   }
 
   private void ensureDynamoDb() {
