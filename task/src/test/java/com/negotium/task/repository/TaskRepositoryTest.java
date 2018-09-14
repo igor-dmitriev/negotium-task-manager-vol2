@@ -58,7 +58,8 @@ public class TaskRepositoryTest {
       EnvironmentTestUtils.addEnvironment("testcontainers", ctx.getEnvironment(),
           "spring.datasource.url=" + POSTGRESQL_CONTAINER.getJdbcUrl(),
           "spring.datasource.username=" + POSTGRESQL_CONTAINER.getUsername(),
-          "spring.datasource.password=" + POSTGRESQL_CONTAINER.getPassword()
+          "spring.datasource.password=" + POSTGRESQL_CONTAINER.getPassword(),
+          "spring.datasource.driverClassName=" + "org.postgresql.Driver"
       );
     }
   }

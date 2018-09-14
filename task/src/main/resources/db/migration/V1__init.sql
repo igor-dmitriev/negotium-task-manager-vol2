@@ -5,6 +5,6 @@ CREATE SEQUENCE tasks_seq
 CREATE TABLE tasks (
   id          INTEGER PRIMARY KEY,
   description TEXT NOT NULL,
-  created_at  TIMESTAMP   NOT NULL,
+  created_at  DATE   NOT NULL,
   status      VARCHAR(10) NOT NULL DEFAULT 'ACTIVE'
 );
