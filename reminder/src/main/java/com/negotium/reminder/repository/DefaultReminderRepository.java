@@ -16,8 +16,8 @@ import org.springframework.stereotype.Repository;
 import java.time.ZoneOffset;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Repository
+@RequiredArgsConstructor
 public class DefaultReminderRepository implements ReminderRepository {
 
   private final DynamoDBMapper mapper;
