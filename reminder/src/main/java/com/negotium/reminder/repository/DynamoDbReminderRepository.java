@@ -9,13 +9,13 @@ import com.amazonaws.services.dynamodbv2.model.Condition;
 import com.negotium.reminder.data.ReminderCriteria;
 import com.negotium.reminder.entity.ReminderEntity;
 
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Repository;
 
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
@@ -57,7 +57,7 @@ public class DynamoDbReminderRepository implements ReminderRepository {
   }
 
   @Override
-  public Optional<ReminderEntity> findOne(String user) {
+  public Optional<ReminderEntity> findById(String user) {
     return Optional.ofNullable(mapper.load(ReminderEntity.class, user));
   }
 

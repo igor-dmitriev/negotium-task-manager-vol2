@@ -67,7 +67,7 @@ public class DynamoDbReminderRepositoryTest {
     repository.save(reminder);
 
     // when
-    Optional<ReminderEntity> saved = repository.findOne(USER);
+    Optional<ReminderEntity> saved = repository.findById(USER);
 
     // then
     assertThat(saved).isEqualTo(Optional.of(reminder));

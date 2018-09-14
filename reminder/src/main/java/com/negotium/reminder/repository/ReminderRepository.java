@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ReminderRepository {
   List<ReminderEntity> findReminders(ReminderCriteria search);
 
-  Optional<ReminderEntity> findOne(String user);
+  Optional<ReminderEntity> findById(String user);
 
   void save(ReminderEntity reminder);
 
