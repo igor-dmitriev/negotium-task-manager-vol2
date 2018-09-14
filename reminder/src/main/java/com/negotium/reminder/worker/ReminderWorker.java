@@ -41,7 +41,7 @@ public class ReminderWorker {
     this.tasks.put(ReminderType.PHONE_CALL, phoneCall);
   }
 
-  @Scheduled(cron = "${app.job.scheduler.execution.repeat}")
+  //@Scheduled(cron = "${app.job.scheduler.execution.repeat}")
   public void doWork() {
     List<ReminderEntity> reminders = reminderService.getAllScheduled();
     log.debug("Found scheduled {} reminders", reminders.size());
