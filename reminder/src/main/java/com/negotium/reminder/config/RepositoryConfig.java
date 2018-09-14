@@ -3,7 +3,7 @@ package com.negotium.reminder.config;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.negotium.reminder.migration.DynamoDbMigration;
-import com.negotium.reminder.repository.DefaultReminderRepository;
+import com.negotium.reminder.repository.DynamoDbReminderRepository;
 import com.negotium.reminder.repository.ReminderRepository;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +25,7 @@ public class RepositoryConfig {
 
   @Bean
   public ReminderRepository reminderRepository() {
-    return new DefaultReminderRepository(mapper);
+    return new DynamoDbReminderRepository(mapper);
   }
 
   @Bean
