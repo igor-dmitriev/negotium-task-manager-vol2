@@ -29,6 +29,7 @@ dependencies {
     compile("com.amazonaws:aws-java-sdk:${awsJavaSdkVersion}")
     compile("com.twilio.sdk:twilio:${twilioSdkVersion}")
     compile("org.apache.commons:commons-lang3:3.0")
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
 
     compileOnly('org.projectlombok:lombok')
     compile("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")

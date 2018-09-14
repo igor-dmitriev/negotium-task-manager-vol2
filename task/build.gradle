@@ -28,7 +28,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
 
     runtime('org.postgresql:postgresql')
-    runtime('com.h2database:h2')
     compile('com.microsoft.sqlserver:mssql-jdbc')
     compileOnly('org.projectlombok:lombok')
     compile("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
@@ -36,6 +35,7 @@ dependencies {
     apt("org.projectlombok:lombok")
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.4'
 
+    testCompile('org.testcontainers:mssqlserver:1.8.3')
     testCompile('com.github.database-rider:rider-core:1.2.8')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('io.rest-assured:rest-assured')
