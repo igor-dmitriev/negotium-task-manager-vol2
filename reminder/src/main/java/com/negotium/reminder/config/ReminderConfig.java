@@ -1,10 +1,8 @@
 package com.negotium.reminder.config;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.negotium.reminder.client.TaskHttpClient;
 import com.negotium.reminder.meta.ReminderType;
-import com.negotium.reminder.migration.DynamoDbMigration;
 import com.negotium.reminder.parser.RemindAtParser;
 import com.negotium.reminder.property.TwilioProperties;
 import com.negotium.reminder.repository.ReminderRepository;
@@ -16,9 +14,6 @@ import com.negotium.reminder.task.Task;
 import com.negotium.reminder.task.TaskType;
 import com.negotium.reminder.worker.ReminderWorker;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +21,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @EnableScheduling
@@ -51,15 +49,6 @@ public class ReminderConfig {
   @Bean
   public TaskHttpClient taskHttpClient() {
     return new TaskHttpClient(restTemplate(), objectMapper());
-  }
-
-  @Bean
-  public DynamoDbMigration dynamoDbMigration(
-      AmazonDynamoDB dynamoDB,
-      @Value("${app.aws.dynamoDb.readCapacityUnits}") long dynamoDbReadCapacityUnits,
-      @Value("${app.aws.dynamoDb.writeCapacityUnits}") long dynamoDbWriteCapacityUnits
-  ) {
-    return new DynamoDbMigration(dynamoDB, dynamoDbReadCapacityUnits, dynamoDbWriteCapacityUnits);
   }
 
   @Bean
