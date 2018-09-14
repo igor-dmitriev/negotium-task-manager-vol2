@@ -13,7 +13,6 @@ import com.negotium.reminder.data.ReminderCriteria;
 import com.negotium.reminder.entity.ReminderEntity;
 import com.negotium.reminder.meta.ReminderStatus;
 
-import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -38,9 +37,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.testcontainers.containers.localstack.LocalStackContainer.Service.DYNAMODB;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = ReminderRepositoryTestConf.class, initializers = ReminderRepositoryTest.Initializer.class)
+@ContextConfiguration(classes = ReminderRepositoryTestConf.class, initializers = DynamoDbReminderRepositoryTest.Initializer.class)
 @Ignore
-public class ReminderRepositoryTest {
+public class DynamoDbReminderRepositoryTest {
 
   private static final int DYNAMODB_PORT = 4569;
 

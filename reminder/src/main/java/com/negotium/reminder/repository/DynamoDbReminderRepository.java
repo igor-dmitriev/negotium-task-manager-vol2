@@ -18,7 +18,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class DefaultReminderRepository implements ReminderRepository {
+public class DynamoDbReminderRepository implements ReminderRepository {
 
   private final DynamoDBMapper mapper;
 
