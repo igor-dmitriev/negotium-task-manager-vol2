@@ -47,13 +47,9 @@ public class ReminderEntity {
 
   @DynamoDBAttribute(attributeName = STATUS_ATTR)
   @DynamoDBTypeConvertedEnum
+  @Builder.Default
   private ReminderStatus status = ReminderStatus.SCHEDULED;
 
   @DynamoDBAttribute(attributeName = ERROR_MSG_ATTR)
   private String errorMessage;
-
-  @SuppressWarnings("unused")
-  public static class ReminderBuilder {
-    private ReminderStatus status = ReminderStatus.SCHEDULED;
-  }
 }
