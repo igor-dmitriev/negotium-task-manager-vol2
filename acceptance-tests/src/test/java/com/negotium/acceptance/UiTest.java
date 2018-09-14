@@ -2,6 +2,7 @@ package com.negotium.acceptance;
 
 
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -13,6 +14,7 @@ import java.io.File;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 import static org.testcontainers.containers.BrowserWebDriverContainer.VncRecordingMode.RECORD_FAILING;
 
+@Ignore
 public class UiTest {
 
   @ClassRule
