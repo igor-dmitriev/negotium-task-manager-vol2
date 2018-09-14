@@ -21,7 +21,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "user")
 public class ReminderEntity {
 
   public static final String REMINDERS_TABLE = "reminders";
